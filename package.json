@@ -1,0 +1,32 @@
+{
+  "name": "genshin-gacha-kit",
+  "version": "0.0.1",
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "typings": "lib/index.d.ts",
+  "repository": "https://github.com/Dragon-Fish/genshin-gacha-kit.git",
+  "author": "Dragon-Fish <dragon-fish@qq.com>",
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "yarn clear && tsc",
+    "dev": "tsc --watch",
+    "clear": "wsl rm -rf ./lib ./dist ./src/**/dist",
+    "bump": "yarn lint && yarn build && bump",
+    "lint": "eslint src/*.ts src/**/*.ts",
+    "pretty": "eslint --fix src/*.ts src/**/*.ts"
+  },
+  "dependencies": {
+    "tslib": "^2.2.0"
+  },
+  "devDependencies": {
+    "@dragon-fish/bump": "^0.0.15",
+    "@microsoft/api-extractor": "^7.13.4",
+    "@types/node": "^14.14.37",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "eslint": "^7.24.0",
+    "typescript": "^4.2.4"
+  }
+}
