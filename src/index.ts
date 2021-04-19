@@ -48,6 +48,11 @@ export class GenshinGachaKit {
     })
   }
 
+  /**
+   * @method setGachaPool 配置卡池信息
+   * @param {GachaPool} gachaPool 卡池信息
+   * @return {this}
+   */
   setGachaPool(gachaPool: GachaPool): this {
     this._gachaPool = gachaPool
     return this
@@ -66,10 +71,6 @@ export class GenshinGachaKit {
     return this
   }
 
-  getCounter(name?: keyof AppCounter): number | number[] | AppCounter {
-    return name ? this._counter?.[name] || 0 : this._counter
-  }
-
   increaseCounter(name: keyof AppCounter, increase = 1): this {
     const value = this.getCounter(name)
     if (typeof value === 'number') {
@@ -78,6 +79,25 @@ export class GenshinGachaKit {
       this.setCounter(name, [...(value as number[]), increase])
     }
     return this
+  }
+
+  /**
+   * @method getCounter 获取指定计数器记录，若未指定则以键值对返回全部计数器记录
+   * @param name 
+   * total {number} 总抽取数;
+   * ensureSSR {0 | 1} 是否位于“大保底”状态;
+   * lastUpSSR {number} 距离上一次 UP 5 星已过去多少抽;
+   * lastUpSR {number} 距离上一次 UP 4 星已过去多少抽;
+   * lastSSR {number} 距离上一次 5 星已过去多少抽;
+   * lastSR {number} 距离上一次 4 星已过去多少抽;
+   * upSSR {number[]} 每次获取 UP 5 星的间隔;
+   * upSR {number[]} 每次获取 UP 4 星的间隔;
+   * ssr {number[]} 每次获取 5 星的间隔;
+   * sr {number[]} 每次获取 4 星的间隔;
+   * @return {number | number[] | AppCounter}
+   */
+  getCounter(name?: keyof AppCounter): number | number[] | AppCounter {
+    return name ? this._counter?.[name] || 0 : this._counter
   }
 
   setResult(type: keyof WishResult | WishResult, value?: string[]): this {
@@ -89,12 +109,17 @@ export class GenshinGachaKit {
     return this
   }
 
-  getResult(type?: keyof WishResult): WishResult | string[] {
-    return type ? this._result[type] : this._result
-  }
-
   increaseResult(type: keyof WishResult, name: string) {
     this.setResult(type, [...(this.getResult(type) as string[]), name])
+  }
+
+  /**
+   *
+   * @param type
+   * @returns
+   */
+  getResult(type?: keyof WishResult): WishResult | string[] {
+    return type ? this._result[type] : this._result
   }
 
   /**
@@ -179,6 +204,10 @@ export class GenshinGachaKit {
     return result
   }
 
+  /**
+   * @method singleWish 进行单次抽取并获取结果
+   * @return {string} 抽取结果
+   */
   singleWish(): string {
     this.increaseCounter('total')
 
@@ -219,6 +248,11 @@ export class GenshinGachaKit {
     }
   }
 
+  /**
+   * @method multiWish 进行多次抽取并获取结果集合
+   * @param count 抽取的次数
+   * @return {string[]} 结果集合
+   */
   multiWish(count: number): string[] {
     const result: string[] = []
     for (let i = 0; i < count; i++) {

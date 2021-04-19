@@ -1,6 +1,6 @@
 {
   "name": "genshin-gacha-kit",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "lib/index.js",
   "files": [
     "lib"
@@ -12,7 +12,7 @@
   "scripts": {
     "build": "yarn clear && tsc",
     "dev": "tsc --watch",
-    "clear": "wsl rm -rf ./lib ./dist ./src/**/dist",
+    "clear": "wsl rm -rf ./lib ./dist ./src/**/dist > /dev/null &",
     "bump": "yarn lint && yarn build && bump",
     "lint": "eslint src/*.ts src/**/*.ts",
     "pretty": "eslint --fix src/*.ts src/**/*.ts"
