@@ -18,6 +18,7 @@
     "pretty": "eslint --fix src/*.ts src/**/*.ts"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "tslib": "^2.2.0"
   },
   "devDependencies": {

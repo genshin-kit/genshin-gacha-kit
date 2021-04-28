@@ -5,7 +5,14 @@
  * @author 机智的小鱼君 <dragon-fish@qq.com>
  * @license Aoache-2.0
  */
-import { AppCounter, GachaPool, SpecialRoll, WishResult } from './types'
+import {
+  AppCounter,
+  AppGachaPool,
+  SpecialRoll,
+  AppWishResult,
+  OfficialGachaType,
+} from './types'
+import { getOfficialGachaPool, poolStructureConverter } from './util'
 export * from './types'
 
 function randomNum(): number {
@@ -18,10 +25,10 @@ function randomPick(list: any[]) {
 
 export class GenshinGachaKit {
   _counter!: AppCounter
-  _gachaPool!: GachaPool
-  _result!: WishResult
+  _gachaPool!: AppGachaPool
+  _result!: AppWishResult
 
-  constructor(gachaPool: GachaPool) {
+  constructor(gachaPool: AppGachaPool) {
     // Init gacha pool
     if (gachaPool) {
       this.setGachaPool(gachaPool)
@@ -50,11 +57,22 @@ export class GenshinGachaKit {
 
   /**
    * @method setGachaPool 配置卡池信息
-   * @param {GachaPool} gachaPool 卡池信息
+   * @param {AppGachaPool} gachaPool 卡池信息
    * @return {this}
    */
-  setGachaPool(gachaPool: GachaPool): this {
+  setGachaPool(gachaPool: AppGachaPool): this {
     this._gachaPool = gachaPool
+    return this
+  }
+
+  async setOfficialGachaPool(type: keyof OfficialGachaType): Promise<this> {
+    const pool = await getOfficialGachaPool(type)
+    if (pool) {
+      this.setGachaPool(poolStructureConverter(pool))
+    } else {
+      throw 'No such pool'
+    }
+
     return this
   }
 
@@ -83,7 +101,7 @@ export class GenshinGachaKit {
 
   /**
    * @method getCounter 获取指定计数器记录，若未指定则以键值对返回全部计数器记录
-   * @param name 
+   * @param name
    * total {number} 总抽取数;
    * ensureSSR {0 | 1} 是否位于“大保底”状态;
    * lastUpSSR {number} 距离上一次 UP 5 星已过去多少抽;
@@ -100,16 +118,16 @@ export class GenshinGachaKit {
     return name ? this._counter?.[name] || 0 : this._counter
   }
 
-  setResult(type: keyof WishResult | WishResult, value?: string[]): this {
+  setResult(type: keyof AppWishResult | AppWishResult, value?: string[]): this {
     if (typeof type === 'string' && typeof value !== 'undefined') {
       this._result[type] = value
     } else {
-      this._result = type as WishResult
+      this._result = type as AppWishResult
     }
     return this
   }
 
-  increaseResult(type: keyof WishResult, name: string) {
+  increaseResult(type: keyof AppWishResult, name: string) {
     this.setResult(type, [...(this.getResult(type) as string[]), name])
   }
 
@@ -118,7 +136,7 @@ export class GenshinGachaKit {
    * @param type
    * @returns
    */
-  getResult(type?: keyof WishResult): WishResult | string[] {
+  getResult(type?: keyof AppWishResult): AppWishResult | string[] {
     return type ? this._result[type] : this._result
   }
 
