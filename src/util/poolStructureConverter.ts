@@ -16,6 +16,8 @@ export function poolStructureConverter(data: OfficialGachaPool): AppGachaPool {
   const pool: AppGachaPool = {
     name: '',
     type: '' as AppGachaPool['type'],
+    begin: '',
+    end: '',
     upSSR: [],
     upSR: [],
     ssr: [],
@@ -23,8 +25,10 @@ export function poolStructureConverter(data: OfficialGachaPool): AppGachaPool {
     r: []
   }
 
-  pool.name = data.title
+  pool.name = data.title.replace(/<\/?.+?>/g, '')
   pool.type = gachaType[data.gacha_type]
+  pool.begin = data.begin_time
+  pool.end = data.end_time
   // 5*
   data.r5_prob_list.forEach((item) => {
     const name = item.item_name

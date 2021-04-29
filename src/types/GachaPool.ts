@@ -4,6 +4,8 @@ import { AppGachaItem } from './App'
 export interface AppGachaPool {
   name: string
   type: 'novice' | 'character' | 'weapon' | 'permanent'
+  begin?: string
+  end?: string
   upSSR: AppGachaItem[]
   upSR: AppGachaItem[]
   ssr: AppGachaItem[]
@@ -25,6 +27,8 @@ export interface OfficialGachaPool {
   banner: string
   content: string
   date_range: string
+  begin_time?: string
+  end_time?: string
   gacha_type: keyof OfficialGachaType
   r3_baodi_prob: string
   r3_prob: string
@@ -42,10 +46,10 @@ export interface OfficialGachaPool {
 }
 
 export interface OfficialGachaType {
-  '200': '常驻'
-  '100': '新手'
-  '301': '角色'
-  '302': '武器'
+  100: '新手'
+  200: '常驻'
+  301: '角色'
+  302: '武器'
 }
 
 export interface OfficialGachaPoolProb {
