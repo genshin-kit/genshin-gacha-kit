@@ -3,7 +3,7 @@ import { AppGachaItem } from './App'
 // GenshinGachaKit 卡池数据
 export interface AppGachaPool {
   name: string
-  type: 'character' | 'weapon' | 'newcomers'
+  type: 'novice' | 'character' | 'weapon' | 'permanent'
   upSSR: AppGachaItem[]
   upSR: AppGachaItem[]
   ssr: AppGachaItem[]

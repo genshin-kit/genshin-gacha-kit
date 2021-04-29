@@ -11,9 +11,11 @@ import {
   SpecialRoll,
   AppWishResult,
   OfficialGachaType,
+  AppGachaItem
 } from './types'
 import { getOfficialGachaPool, poolStructureConverter } from './util'
 export * from './types'
+export * as util from './util'
 
 function randomNum(): number {
   return Math.random()
@@ -44,14 +46,14 @@ export class GenshinGachaKit {
       upSSR: [],
       upSR: [],
       ssr: [],
-      sr: [],
+      sr: []
     })
 
     // Init result
     this.setResult({
       ssr: [],
       sr: [],
-      r: [],
+      r: []
     })
   }
 
@@ -83,7 +85,7 @@ export class GenshinGachaKit {
     } else if (typeof name === 'object') {
       this._counter = {
         ...this._counter,
-        ...name,
+        ...name
       }
     }
     return this
@@ -118,7 +120,10 @@ export class GenshinGachaKit {
     return name ? this._counter?.[name] || 0 : this._counter
   }
 
-  setResult(type: keyof AppWishResult | AppWishResult, value?: string[]): this {
+  setResult(
+    type: keyof AppWishResult | AppWishResult,
+    value?: AppGachaItem[]
+  ): this {
     if (typeof type === 'string' && typeof value !== 'undefined') {
       this._result[type] = value
     } else {
@@ -127,8 +132,8 @@ export class GenshinGachaKit {
     return this
   }
 
-  increaseResult(type: keyof AppWishResult, name: string) {
-    this.setResult(type, [...(this.getResult(type) as string[]), name])
+  increaseResult(type: keyof AppWishResult, item: AppGachaItem) {
+    this.setResult(type, [...(this.getResult(type) as AppGachaItem[]), item])
   }
 
   /**
@@ -136,7 +141,7 @@ export class GenshinGachaKit {
    * @param type
    * @returns
    */
-  getResult(type?: keyof AppWishResult): AppWishResult | string[] {
+  getResult(type?: keyof AppWishResult): AppWishResult | AppGachaItem[] {
     return type ? this._result[type] : this._result
   }
 
@@ -151,7 +156,7 @@ export class GenshinGachaKit {
     upChance,
     softEnsure,
     turningPoint,
-    hardEnsure,
+    hardEnsure
   }: SpecialRoll): 0 | 1 | 2 {
     let chance = 0
     const more = (1 - baseChance) / (softEnsure - turningPoint)
@@ -182,7 +187,7 @@ export class GenshinGachaKit {
       upChance: 0.5,
       softEnsure: 90,
       turningPoint: 72,
-      hardEnsure: ensure,
+      hardEnsure: ensure
     })
     if (result === 1) {
       this.setCounter('ensureSSR', 1)
@@ -209,7 +214,7 @@ export class GenshinGachaKit {
       upChance: 0.5,
       softEnsure: 10,
       hardEnsure: false,
-      turningPoint: 7,
+      turningPoint: 7
     })
     if (result === 2) {
       this.increaseCounter('upSR', this.getCounter('lastUpSR') as number)
@@ -226,28 +231,34 @@ export class GenshinGachaKit {
    * @method singleWish 进行单次抽取并获取结果
    * @return {string} 抽取结果
    */
-  singleWish(): string {
+  singleWish(): AppGachaItem {
     this.increaseCounter('total')
 
     const getSSR = (isUP: boolean) => {
+      if (this._gachaPool.upSSR.length < 1) {
+        this._gachaPool.upSSR = this._gachaPool.ssr
+      }
       const character = randomPick(
         isUP ? this._gachaPool.upSSR : this._gachaPool.ssr
-      ) as string
+      ) as AppGachaItem
       this.increaseResult('ssr', character)
 
       return character
     }
 
     const getSR = (isUP: boolean) => {
+      if (this._gachaPool.upSR.length < 1) {
+        this._gachaPool.upSR = this._gachaPool.sr
+      }
       const character = randomPick(
         isUP ? this._gachaPool.upSR : this._gachaPool.sr
-      ) as string
+      ) as AppGachaItem
       this.increaseResult('sr', character)
 
       return character
     }
     const getR = () => {
-      const character = randomPick(this._gachaPool.r) as string
+      const character = randomPick(this._gachaPool.r) as AppGachaItem
       this.increaseResult('r', character)
 
       return character
@@ -271,8 +282,8 @@ export class GenshinGachaKit {
    * @param count 抽取的次数
    * @return {string[]} 结果集合
    */
-  multiWish(count: number): string[] {
-    const result: string[] = []
+  multiWish(count: number): AppGachaItem[] {
+    const result: AppGachaItem[] = []
     for (let i = 0; i < count; i++) {
       result.push(this.singleWish())
     }

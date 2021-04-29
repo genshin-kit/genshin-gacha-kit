@@ -3,7 +3,7 @@ import axios from 'axios'
 import {
   OfficialGachaIndex,
   OfficialGachaPool,
-  OfficialGachaType,
+  OfficialGachaType
 } from '../types'
 
 const API_ENDPOINT = 'https://webstatic.mihoyo.com/hk4e/gacha_info/cn_gf01'
@@ -22,7 +22,7 @@ export async function getOfficialGachaPool(
   type: keyof OfficialGachaType
 ): Promise<OfficialGachaPool | null> {
   const list = await getGachaIndex()
-  const pollData = list.filter((i) => i.gacha_type === type)
+  const pollData = list.filter((i) => String(i.gacha_type) === type)
   if (pollData.length < 1) return null
   const id = pollData[0].gacha_id
   return getGachaData(id)

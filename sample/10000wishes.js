@@ -1,5 +1,5 @@
 const { GenshinGachaKit } = require('..')
-const App = new GenshinGachaKit(require('./gachaPool')[0])
+const App = new GenshinGachaKit(require('./customPool'))
 
 function average(arr) {
   return arr.reduce((a, b) => a + b, 0) / arr.length
@@ -34,5 +34,5 @@ console.log(`共抽取 ${total} 次
   2
 )}%
 你的 5 星：
-${ssrResult.join('、')}
+${ssrResult.map((i) => i.name).join('、')}
 模拟结束，耗时：${Date.now() - startTime}ms`)

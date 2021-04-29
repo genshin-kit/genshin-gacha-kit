@@ -1,55 +1,31 @@
-module.exports = [
-  {
-    name: '暂别冬都',
-    type: 'character',
-    upSSR: ['达达利亚'],
-    upSR: ['罗莎莉亚', '芭芭拉', '菲谢尔'],
-    ssr: ['刻晴', '莫娜', '七七', '迪卢克', '琴'],
-    sr: [
-      '辛焱',
-      '砂糖',
-      '迪奥娜',
-      '重云',
-      '诺艾尔',
-      '班尼特',
-      '凝光',
-      '行秋',
-      '北斗',
-      '香菱',
-      '雷泽',
-      '弓藏',
-      '祭礼弓',
-      '绝弦',
-      '西风猎弓',
-      '昭心',
-      '祭礼残章',
-      '流浪乐章',
-      '西风秘典',
-      '西风长枪',
-      '匣里灭辰',
-      '雨裁',
-      '祭礼大剑',
-      '钟剑',
-      '西风大剑',
-      '匣里龙吟',
-      '祭礼剑',
-      '笛剑',
-      '西风剑',
-    ],
-    r: [
-      '弹弓',
-      '神射手之誓',
-      '鸦羽弓',
-      '翡玉法球',
-      '讨龙英杰谭',
-      '魔导绪论',
-      '黑缨枪',
-      '以理服人',
-      '沐浴龙血的剑',
-      '铁影阔剑',
-      '飞天御剑',
-      '黎明神剑',
-      '冷刃',
-    ],
-  },
-]
+module.exports = {
+  name: '「<color=#cc9046FF>陵薮</color>市朝」活动祈愿',
+  type: 'character',
+  upSSR: [{ name: '小鱼君', type: 'character' }],
+  upSR: [
+    { name: '小鸡', type: 'character' },
+    { name: '小鸭', type: 'character' },
+    { name: '小狗', type: 'character' }
+  ],
+  ssr: [
+    { name: '青龙', type: 'character' },
+    { name: '白虎', type: 'character' },
+    { name: '朱雀', type: 'character' },
+    { name: '玄武', type: 'character' }
+  ],
+  sr: [
+    { name: '平板电脑', type: 'character' },
+    { name: '游戏机', type: 'character' },
+    { name: '轻小说', type: 'character' },
+    { name: '冰可乐', type: 'character' }
+  ],
+  r: [
+    { name: '小木棍', type: 'weapon' },
+    { name: '小木板', type: 'weapon' },
+    { name: '火柴盒', type: 'weapon' },
+    { name: '塑料瓶', type: 'weapon' },
+    { name: '铅笔盒', type: 'weapon' },
+    { name: '单肩包', type: 'weapon' },
+    { name: '垃圾袋', type: 'weapon' }
+  ]
+}
