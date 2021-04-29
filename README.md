@@ -1,5 +1,9 @@
 # GenshinGachaKit
 
+![](https://badgen.net/npm/v/genshin-gacha-kit) ![](https://badgen.net/npm/v/genshin-gacha-kit/next) ![](https://badgen.net/npm/types/genshin-gacha-kit) ![](https://badgen.net/npm/license/genshin-gacha-kit)
+
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/Dragon-Fish/genshin-gacha-kit.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Dragon-Fish/genshin-gacha-kit/alerts/) [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/Dragon-Fish/genshin-gacha-kit.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Dragon-Fish/genshin-gacha-kit/context:javascript)
+
 使用自动同步的官方卡池数据或者自定义卡池数据的原神抽奖模拟工具！
 
 Use automatically synchronized official gacha pool data or custom gacha pool data to simulate the Genshin Impact wish.
