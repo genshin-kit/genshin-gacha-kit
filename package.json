@@ -1,6 +1,6 @@
 {
   "name": "genshin-gacha-kit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Use automatically synchronized official gacha pool data or custom gacha pool data to simulate the Genshin Impact wish",
   "main": "lib/index.js",
   "files": [
