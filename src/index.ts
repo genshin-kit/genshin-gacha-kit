@@ -101,6 +101,22 @@ export class GenshinGachaKit {
     return this
   }
 
+  clearCounter() {
+    this.setCounter({
+      total: 0,
+      ensureSSR: 0,
+      lastUpSSR: 0,
+      lastUpSR: 0,
+      lastSSR: 0,
+      lastSR: 0,
+      upSSR: [],
+      upSR: [],
+      ssr: [],
+      sr: []
+    })
+    return this
+  }
+
   /**
    * @method getCounter 获取指定计数器记录，若未指定则以键值对返回全部计数器记录
    * @param name
@@ -133,7 +149,24 @@ export class GenshinGachaKit {
   }
 
   increaseResult(type: keyof AppWishResult, item: AppGachaItem) {
-    this.setResult(type, [...(this.getResult(type) as AppGachaItem[]), item])
+    const oldResult = this.getResult(type) as AppGachaItem[]
+    const sameItem = oldResult.filter((i) => i.name === item.name)
+    if (sameItem.length < 1) {
+      item.count = 1
+      this.setResult(type, [...oldResult, item])
+    } else {
+      sameItem[0].count && sameItem[0].count++
+    }
+    return this
+  }
+
+  clearResult() {
+    this.setResult({
+      ssr: [],
+      sr: [],
+      r: []
+    })
+    return this
   }
 
   /**
@@ -142,7 +175,7 @@ export class GenshinGachaKit {
    * @returns
    */
   getResult(type?: keyof AppWishResult): AppWishResult | AppGachaItem[] {
-    return type ? this._result[type] : this._result
+    return type ? this._result?.[type] || [] : this._result
   }
 
   /**
@@ -229,7 +262,7 @@ export class GenshinGachaKit {
 
   /**
    * @method singleWish 进行单次抽取并获取结果
-   * @return {string} 抽取结果
+   * @return {AppGachaItem} 抽取结果
    */
   singleWish(): AppGachaItem {
     this.increaseCounter('total')
@@ -241,6 +274,7 @@ export class GenshinGachaKit {
       const character = randomPick(
         isUP ? this._gachaPool.upSSR : this._gachaPool.ssr
       ) as AppGachaItem
+      character.rarity = 5
       this.increaseResult('ssr', character)
 
       return character
@@ -253,12 +287,14 @@ export class GenshinGachaKit {
       const character = randomPick(
         isUP ? this._gachaPool.upSR : this._gachaPool.sr
       ) as AppGachaItem
+      character.rarity = 4
       this.increaseResult('sr', character)
 
       return character
     }
     const getR = () => {
       const character = randomPick(this._gachaPool.r) as AppGachaItem
+      character.rarity = 3
       this.increaseResult('r', character)
 
       return character
@@ -280,7 +316,7 @@ export class GenshinGachaKit {
   /**
    * @method multiWish 进行多次抽取并获取结果集合
    * @param count 抽取的次数
-   * @return {string[]} 结果集合
+   * @return {AppGachaItem[]} 结果集合
    */
   multiWish(count: number): AppGachaItem[] {
     const result: AppGachaItem[] = []

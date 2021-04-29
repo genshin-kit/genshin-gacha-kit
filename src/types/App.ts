@@ -14,6 +14,8 @@ export interface AppCounter {
 export interface AppGachaItem {
   name: string
   type: 'character' | 'weapon'
+  rarity?: number
+  count?: number
 }
 
 export interface AppWishResult {

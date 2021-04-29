@@ -33,21 +33,21 @@ export function poolStructureConverter(data: OfficialGachaPool): AppGachaPool {
   data.r5_prob_list.forEach((item) => {
     const name = item.item_name
     const type = item.item_type
-    const gachaItem: AppGachaItem = { name, type: itemType[type] }
+    const gachaItem: AppGachaItem = { name, type: itemType[type], rarity: 5 }
     item.is_up === 1 ? pool.upSSR.push(gachaItem) : pool.ssr.push(gachaItem)
   })
   // 4*
   data.r4_prob_list.forEach((item) => {
     const name = item.item_name
     const type = item.item_type
-    const gachaItem: AppGachaItem = { name, type: itemType[type] }
+    const gachaItem: AppGachaItem = { name, type: itemType[type], rarity: 4 }
     item.is_up === 1 ? pool.upSR.push(gachaItem) : pool.sr.push(gachaItem)
   })
   // 3*
   data.r3_prob_list.forEach((item) => {
     const name = item.item_name
     const type = item.item_type
-    const gachaItem: AppGachaItem = { name, type: itemType[type] }
+    const gachaItem: AppGachaItem = { name, type: itemType[type], rarity: 3 }
     pool.r.push(gachaItem)
   })
 

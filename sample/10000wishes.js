@@ -34,5 +34,5 @@ console.log(`共抽取 ${total} 次
   2
 )}%
 你的 5 星：
-${ssrResult.map((i) => i.name).join('、')}
+${ssrResult.map((i) => `${i.name}x${i.count}`).join('、')}
 模拟结束，耗时：${Date.now() - startTime}ms`)
