@@ -1,5 +1,5 @@
 module.exports = {
-  name: '「<color=#cc9046FF>陵薮</color>市朝」活动祈愿',
+  name: '「机智的小鱼君」活动祈愿',
   type: 'character',
   upSSR: [{ name: '小鱼君', type: 'character' }],
   upSR: [
@@ -14,10 +14,10 @@ module.exports = {
     { name: '玄武', type: 'character' }
   ],
   sr: [
-    { name: '平板电脑', type: 'character' },
-    { name: '游戏机', type: 'character' },
-    { name: '轻小说', type: 'character' },
-    { name: '冰可乐', type: 'character' }
+    { name: '平板电脑', type: 'weapon' },
+    { name: '游戏机', type: 'weapon' },
+    { name: '轻小说', type: 'weapon' },
+    { name: '冰可乐', type: 'weapon' }
   ],
   r: [
     { name: '小木棍', type: 'weapon' },
