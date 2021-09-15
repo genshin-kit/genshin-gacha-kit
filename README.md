@@ -1,3 +1,3 @@
 # GenshinGachaKit
 
-Merged to https://github.com/genshin-kit/genshin-kit/packages/gacha
+Has been merged into https://github.com/genshin-kit/genshin-kit
